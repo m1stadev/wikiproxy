@@ -27,6 +27,7 @@ async def get_key_page(
         'srwhat': 'title',
         'srlimit': '1',
         'format': 'json',
+        'srnamespace': '2304',
     }
     async with HTTP_SEMAPHORE, session.get(
         'https://theapplewiki.com/api.php', params=params
