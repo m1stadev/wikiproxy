@@ -84,7 +84,8 @@ def parse_page(data: str, identifer: str, boardconfig: str = None) -> dict:
             )
 
         if page_data['Model2'].lower() == boardconfig.lower():
-            for key in page_data:
+            keys_list = list(page_data.keys()) # Cannot iterate over dict
+            for key in keys_list:
                 if '2' in key:
                     page_data[key.replace('2', '')] = page_data[key]
 
@@ -161,7 +162,7 @@ async def add_process_time_header(request, call_next):
     return response
 
 
-@app.get('/wikiproxy/{identifier}/{buildid}')
+@app.get('/firmware/{identifier}/{buildid}')
 async def get_firmware_keys(identifier: str, buildid: str) -> dict:
     async with aiohttp.ClientSession() as session:
         page = await get_key_page(session, identifier, buildid)
@@ -169,7 +170,7 @@ async def get_firmware_keys(identifier: str, buildid: str) -> dict:
     return parse_page(page, identifier)
 
 
-@app.get('/wikiproxy/{identifier}/{boardconfig}/{buildid}')
+@app.get('/firmware/{identifier}/{boardconfig}/{buildid}')
 async def get_firmware_keys(identifier: str, boardconfig: str, buildid: str) -> dict:
     async with aiohttp.ClientSession() as session:
         page = await get_key_page(session, identifier, buildid)
@@ -178,4 +179,4 @@ async def get_firmware_keys(identifier: str, boardconfig: str, buildid: str) -> 
 
 
 if __name__ == '__main__':
-    uvicorn.run(app='__main__:app', uds='wikiproxy.sock')
+    uvicorn.run(app='__main__:app', host='0.0.0.0', port=8888)
