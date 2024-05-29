@@ -84,7 +84,8 @@ def parse_page(data: str, identifer: str, boardconfig: str = None) -> dict:
             )
 
         if page_data['Model2'].lower() == boardconfig.lower():
-            for key in page_data:
+            keys_list = list(page_data.keys()) # Cannot iterate over dict
+            for key in keys_list:
                 if '2' in key:
                     page_data[key.replace('2', '')] = page_data[key]
 
