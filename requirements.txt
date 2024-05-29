@@ -1,0 +1,5 @@
+aiohttp==3.9.1
+fastapi==0.110.0
+ujson==5.9.0
+uvicorn==0.28.1
+wikitextparser==0.55.7
