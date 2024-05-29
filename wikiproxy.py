@@ -161,7 +161,7 @@ async def add_process_time_header(request, call_next):
     return response
 
 
-@app.get('/wikiproxy/{identifier}/{buildid}')
+@app.get('/firmware/{identifier}/{buildid}')
 async def get_firmware_keys(identifier: str, buildid: str) -> dict:
     async with aiohttp.ClientSession() as session:
         page = await get_key_page(session, identifier, buildid)
@@ -169,7 +169,7 @@ async def get_firmware_keys(identifier: str, buildid: str) -> dict:
     return parse_page(page, identifier)
 
 
-@app.get('/wikiproxy/{identifier}/{boardconfig}/{buildid}')
+@app.get('/firmware/{identifier}/{boardconfig}/{buildid}')
 async def get_firmware_keys(identifier: str, boardconfig: str, buildid: str) -> dict:
     async with aiohttp.ClientSession() as session:
         page = await get_key_page(session, identifier, buildid)
@@ -178,4 +178,4 @@ async def get_firmware_keys(identifier: str, boardconfig: str, buildid: str) -> 
 
 
 if __name__ == '__main__':
-    uvicorn.run(app='__main__:app', uds='wikiproxy.sock')
+    uvicorn.run(app='__main__:app', host='0.0.0.0', port=8888)
