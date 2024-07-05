@@ -23,8 +23,7 @@ async def get_key_page(
     params = {
         'action': 'query',
         'list': 'search',
-        'srsearch': f'Keys: {buildid} ({identifier})',
-        'srwhat': 'title',
+        'srsearch': f'intitle:{identifier} {buildid}',
         'srlimit': '1',
         'format': 'json',
         'srnamespace': '2304',
