@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "wikiproxy"
+description = "A FutureRestore-compatible firmware key API."
+version = "0.0.0"
+authors = ["m1stadev <adamhamdi31@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/m1stadev/wikiproxy"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "semver"
+dirty = true
+
+[tool.poetry.scripts]
+wikiproxy = "wikiproxy.__main__:main"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+click = "^8.1.7"
+uvicorn = "^0.30.1"
+aiohttp = "^3.9.5"
+fastapi = "^0.111.0"
+
+[tool.ruff]
+target-version = "py38"
+
+[tool.ruff.lint]
+extend-select = ["I"]
+ignore = ["E722"]
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/m1stadev/wikiproxy/issues"
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
+build-backend = "poetry_dynamic_versioning.backend"
