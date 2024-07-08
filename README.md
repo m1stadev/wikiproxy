@@ -1,14 +1,12 @@
 # wikiproxy
 
-Get firmware keys from The Apple Wiki
+A FutureRestore-compatible firmware key API.
 
-### Usage
+## Installation
+`python3 -m pip install git+https://github.com/m1stadev/wikiproxy.git`
 
-1. Download and extract this repo (or git clone)
-1. Make sure that you have Python 3 installed, `cd` to the directory and run:
-    ```
-    python3 -m venv venv
-    venv/bin/python3 -m pip install -r requirements.txt
-    venv/bin/python3 wikiproxy.py
-    ```
-- The first and second commands above only need to be done once
+## Usage
+Simply just run the `wikiproxy` command.
+
+## Support
+For any questions/issues you have, [open an issue](https://github.com/m1stadev/wikiproxy/issues).
