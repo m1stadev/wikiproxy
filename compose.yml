@@ -1,0 +1,9 @@
+services:
+  wikiproxy:
+    container_name: wikiproxy
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    ports:
+      - "8888:8888"
