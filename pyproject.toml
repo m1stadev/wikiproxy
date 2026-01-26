@@ -7,14 +7,18 @@ authors = [
 ]
 license = {file = "LICENSE"}
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
-    "click>=8.1.7",
-    "uvicorn>=0.30.1",
-    "aiohttp>=3.9.5",
-    "fastapi>=0.111.0",
-    "wikitextparser>=0.56.0"
-    
+    "typer>=0.21.1",
+    "uvicorn[standard]>=0.40.0",
+    "loguru>=0.7.3",
+    "plykos>=0.3",
+    "fastapi>=0.128.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.14",
 ]
 
 [project.urls]
@@ -22,12 +26,7 @@ Repository = "https://github.com/m1stadev/wikiproxy"
 "Bug Tracker" = "https://github.com/m1stadev/wikiproxy/issues"
 
 [project.scripts]
-wikiproxy = "wikiproxy.__main__:main"
-
-[project.optional-dependencies]
-m1sta = [
-    "gunicorn>=22.0.0",
-]
+wikiproxy = "wikiproxy.__main__:app"
 
 [build-system]
 requires = ["hatchling", "uv-dynamic-versioning"]
@@ -42,11 +41,11 @@ style = "semver"
 dirty = true
 
 [tool.ruff]
-target-version = "py39"
+target-version = "py310"
 
 [tool.ruff.lint]
 extend-select = ["I"]
 ignore = ["E722"]
 
 [tool.ruff.format]
-quote-style = "single"
+quote-style = "preserve"

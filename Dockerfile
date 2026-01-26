@@ -6,6 +6,5 @@ RUN apt-get upgrade -y
 RUN apt install -y git
 
 ENV UV_COMPILE_BYTECODE=1
-ENV UV_NO_DEV=1
 
-CMD ["uvx", "--from", "git+https://github.com/m1stadev/wikiproxy.git", "--verbose", "wikiproxy"]
+CMD ["uvx", "--with", "git+https://github.com/m1stadev/wikiproxy.git", "--from", "fastapi[standard]", "fastapi", "run", "wikiproxy", "--port", "3672", "--proxy-headers"]
