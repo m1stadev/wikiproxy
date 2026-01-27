@@ -7,3 +7,9 @@ services:
 
     ports:
       - "3672:3672"
+
+networks:
+  default:
+    driver: bridge
+    name: pangolin
+    external: true

@@ -13,7 +13,7 @@ dependencies = [
     "uvicorn[standard]>=0.40.0",
     "loguru>=0.7.3",
     "plykos>=0.3",
-    "fastapi>=0.128.0",
+    "fastapi[standard]>=0.128.0",
 ]
 
 [dependency-groups]
