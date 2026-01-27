@@ -1,6 +1,7 @@
 services:
   wikiproxy:
     container_name: wikiproxy
+    restart: unless-stopped
     build:
       context: .
       dockerfile: Dockerfile
