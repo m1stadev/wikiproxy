@@ -1,18 +1,20 @@
 from datetime import datetime
 
-from fastapi import APIRouter, HTTPException
-from plykos import Client, PageNotFound
+from fastapi import APIRouter, HTTPException, Request
+from plykos import PageNotFound
 
 router = APIRouter()
 
 
+
 @router.get('/{device}/{buildid}')
-async def get_firmware_keys(device: str, buildid: str) -> dict:
-    async with Client() as client:
-        try:
-            firm = await client.get_key_data(device, buildid)
-        except PageNotFound:
-            raise HTTPException(status_code=404, detail='Firmware not found')
+async def get_firmware_keys(
+    request: Request, device: str, buildid: str
+) -> dict:
+    try:
+        firm = await request.state.client.get_key_data(device, buildid)
+    except PageNotFound:
+        raise HTTPException(status_code=404, detail='Firmware not found')
 
 
     response = {
@@ -47,12 +49,13 @@ async def get_firmware_keys(device: str, buildid: str) -> dict:
 
 
 @router.get('/{device}/{boardconfig}/{buildid}')
-async def get_board_firmware_keys(device: str, boardconfig: str, buildid: str) -> dict:
-    async with Client() as client:
-        try:
-            firm = await client.get_key_data(device, buildid)
-        except PageNotFound:
-            raise HTTPException(status_code=404, detail='Firmware not found')
+async def get_board_firmware_keys(
+    request: Request, device: str, boardconfig: str, buildid: str
+) -> dict:
+    try:
+        firm = await request.state.client.get_key_data(device, buildid)
+    except PageNotFound:
+        raise HTTPException(status_code=404, detail='Firmware not found')
 
     response = {
         'identifier': firm.identifier,
