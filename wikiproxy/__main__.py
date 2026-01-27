@@ -42,10 +42,10 @@ def cli(
     else:
         sys.tracebacklimit = 0
 
-    app = FastAPI(openapi_url=None)
-    app.include_router(router, prefix='/firmware')
+    api = FastAPI(openapi_url=None, lifespan=lifespan)
+    api.include_router(router, prefix='/firmware')
 
-    uvicorn.run(app=app, host='0.0.0.0', port=8888)
+    uvicorn.run(app=api, host='0.0.0.0', port=8888)
 
 
 if __name__ == '__main__':
