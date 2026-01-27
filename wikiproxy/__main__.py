@@ -1,5 +1,4 @@
 import sys
-from contextlib import asynccontextmanager
 from importlib.metadata import version
 from typing import Annotated
 
@@ -7,8 +6,8 @@ import typer
 import uvicorn
 from fastapi import FastAPI
 from loguru import logger
-from plykos import Client
 
+from wikiproxy import _lifespan
 from wikiproxy.routers import router
 
 
@@ -17,11 +16,7 @@ def _version_callback(val: bool) -> None:
         print(' '.join([__package__, version(__package__)]))
         raise typer.Exit()
 
-# https://stackoverflow.com/a/76322910/17865804
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    async with Client() as client:
-        yield {'client': client}
+
 
 app = typer.Typer()
 
@@ -49,7 +44,7 @@ def cli(
     else:
         sys.tracebacklimit = 0
 
-    api = FastAPI(openapi_url=None, lifespan=lifespan)
+    api = FastAPI(lifespan=_lifespan, openapi_url=None)
     api.include_router(router, prefix='/firmware')
 
     uvicorn.run(app=api, host='0.0.0.0', port=8888)
