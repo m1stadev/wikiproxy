@@ -42,7 +42,7 @@ def cli(
     else:
         sys.tracebacklimit = 0
 
-    app = FastAPI()
+    app = FastAPI(openapi_url=None)
     app.include_router(router, prefix='/firmware')
 
     uvicorn.run(app=app, host='0.0.0.0', port=8888)
