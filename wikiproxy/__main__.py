@@ -12,7 +12,7 @@ from wikiproxy.routers import router
 
 def _version_callback(val: bool) -> None:
     if val:
-        print(' '.join(__package__, version(__package__)))
+        print(' '.join([__package__, version(__package__)]))
         raise typer.Exit()
 
 
