@@ -6,16 +6,12 @@ from plykos import PageNotFound
 router = APIRouter()
 
 
-
 @router.get('/{device}/{buildid}')
-async def get_firmware_keys(
-    request: Request, device: str, buildid: str
-) -> dict:
+async def get_firmware_keys(request: Request, device: str, buildid: str) -> dict:
     try:
         firm = await request.state.client.get_key_data(device, buildid)
     except PageNotFound:
         raise HTTPException(status_code=404, detail='Firmware not found')
-
 
     response = {
         'identifier': firm.identifier,
