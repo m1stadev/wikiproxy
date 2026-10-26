@@ -17,7 +17,6 @@ def _version_callback(val: bool) -> None:
         raise typer.Exit()
 
 
-
 app = typer.Typer()
 
 
